@@ -7,11 +7,7 @@ public class HelloSpringApp {
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext("src/com/spring/demo/applicationContext.xml");
 
-
         Coach coach = context.getBean("MyCoach", Coach.class);
         System.out.println(coach.getDailyWorkout());
-
-
-
     }
 }
