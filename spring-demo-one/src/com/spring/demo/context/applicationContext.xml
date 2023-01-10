@@ -19,8 +19,12 @@
     </bean>
 
 
-    <bean id="myCoach" class="src.com.spring.demo.model.BaseballCoach" scope="prototype">
+    <bean id="myCoach"
+          class="src.com.spring.demo.model.BaseballCoach"
+          init-method="setUpStuff"
+          destroy-method="cleanUpStuff">
         <constructor-arg ref="myFortuneService"/>
+
     </bean>
 
     <bean id="myOtherCoach" class="src.com.spring.demo.model.TrackCoach" scope="prototype">

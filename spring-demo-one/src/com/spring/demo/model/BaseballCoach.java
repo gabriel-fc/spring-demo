@@ -8,6 +8,7 @@ public class BaseballCoach implements Coach {
 
     public BaseballCoach(FortuneService fortuneService){
         this.fortuneService = fortuneService;
+        System.out.println("Baseball coach: inside constructor");
     }
 
     public String getDailyWorkout(){
@@ -17,5 +18,13 @@ public class BaseballCoach implements Coach {
     @Override
     public String getDailyFortune() {
         return fortuneService.getFortune();
+    }
+
+    private void cleanUpStuff(){
+        System.out.println("Baseball coach: inside destroy method");
+    }
+
+    private void setUpStuff(){
+        System.out.println("Baseball coach: inside init method");
     }
 }
