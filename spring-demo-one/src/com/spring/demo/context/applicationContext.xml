@@ -19,15 +19,15 @@
     </bean>
 
 
-    <bean id="myCoach" class="src.com.spring.demo.model.BaseballCoach">
+    <bean id="myCoach" class="src.com.spring.demo.model.BaseballCoach" scope="prototype">
         <constructor-arg ref="myFortuneService"/>
     </bean>
 
-    <bean id="myOtherCoach" class="src.com.spring.demo.model.TrackCoach">
+    <bean id="myOtherCoach" class="src.com.spring.demo.model.TrackCoach" scope="prototype">
         <constructor-arg ref="myFortuneService"/>
     </bean>
 
-    <bean id="myCricketCoach" class="src.com.spring.demo.model.CricketCoach">
+    <bean id="myCricketCoach" class="src.com.spring.demo.model.CricketCoach" scope="prototype">
         <property name="fortuneService" ref="myRandomFortuneService"/>
         <property name="email" value="${cricketTeam.email}"/>
         <property name="team" value="${cricketTeam.team}"/>
