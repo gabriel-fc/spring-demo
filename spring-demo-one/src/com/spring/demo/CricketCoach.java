@@ -1,18 +1,23 @@
 package src.com.spring.demo;
 
-public class TrackCoach implements Coach {
+public class CricketCoach implements Coach{
+
     private FortuneService fortuneService;
 
-    public TrackCoach(FortuneService fortuneService){
+    public CricketCoach(){}
+
+
+    public void setFortuneService(FortuneService fortuneService) {
         this.fortuneService = fortuneService;
     }
+
     @Override
     public String getDailyWorkout() {
-        return "Run a hard 5k";
+        return "not much into training today";
     }
 
     @Override
     public String getDailyFortune() {
-        return "Just do it! " + fortuneService.getFortune();
+        return fortuneService.getFortune();
     }
 }
