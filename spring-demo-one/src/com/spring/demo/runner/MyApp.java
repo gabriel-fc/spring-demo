@@ -1,6 +1,7 @@
-package src.com.spring.demo;
+package src.com.spring.demo.runner;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import src.com.spring.demo.model.Coach;
+import src.com.spring.demo.util.Context;
 
 public class MyApp {
     public static void main(String[] args) {

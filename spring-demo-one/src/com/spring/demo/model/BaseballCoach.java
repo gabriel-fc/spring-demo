@@ -1,4 +1,6 @@
-package src.com.spring.demo;
+package src.com.spring.demo.model;
+
+import src.com.spring.demo.service.FortuneService;
 
 public class BaseballCoach implements Coach {
 

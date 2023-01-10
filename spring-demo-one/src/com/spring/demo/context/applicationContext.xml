@@ -7,21 +7,21 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:property-placeholder location="classpath:src/com/spring/demo/sport.properties"/>
+    <context:property-placeholder location="classpath:src/com/spring/demo/property/sport.properties"/>
 
     <!-- Define your beans here -->
-    <bean id="myFortuneService" class="src.com.spring.demo.HappyFortuneService">
+    <bean id="myFortuneService" class="src.com.spring.demo.service.HappyFortuneService">
     </bean>
 
-    <bean id="myCoach" class="src.com.spring.demo.BaseballCoach">
+    <bean id="myCoach" class="src.com.spring.demo.model.BaseballCoach">
         <constructor-arg ref="myFortuneService"/>
     </bean>
 
-    <bean id="myOtherCoach" class="src.com.spring.demo.TrackCoach">
+    <bean id="myOtherCoach" class="src.com.spring.demo.model.TrackCoach">
         <constructor-arg ref="myFortuneService"/>
     </bean>
 
-    <bean id="myCricketCoach" class="src.com.spring.demo.CricketCoach">
+    <bean id="myCricketCoach" class="src.com.spring.demo.model.CricketCoach">
         <property name="fortuneService" ref="myFortuneService"/>
         <property name="email" value="${cricketTeam.email}"/>
         <property name="team" value="${cricketTeam.team}"/>

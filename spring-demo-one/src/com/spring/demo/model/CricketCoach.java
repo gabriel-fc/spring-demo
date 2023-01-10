@@ -1,6 +1,8 @@
-package src.com.spring.demo;
+package src.com.spring.demo.model;
 
-public class CricketCoach implements Coach{
+import src.com.spring.demo.service.FortuneService;
+
+public class CricketCoach implements Coach {
 
     private FortuneService fortuneService;
     private String email;

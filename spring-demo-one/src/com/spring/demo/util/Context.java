@@ -1,4 +1,4 @@
-package src.com.spring.demo;
+package src.com.spring.demo.util;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -8,7 +8,7 @@ public class Context {
     private Context(){
         context =
                 new ClassPathXmlApplicationContext("src/com/spring/demo/" +
-                        "applicationContext.xml");
+                        "context/applicationContext.xml");
 
     }
 

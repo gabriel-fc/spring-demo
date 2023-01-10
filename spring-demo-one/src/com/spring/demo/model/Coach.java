@@ -1,6 +1,6 @@
-package src.com.spring.demo;
+package src.com.spring.demo.model;
 
-interface Coach {
+public interface Coach {
     String getDailyWorkout();
     String getDailyFortune();
 }
