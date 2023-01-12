@@ -22,7 +22,6 @@ public class AmericanFootballCoach implements Coach{
 
     @Autowired
     @Qualifier("happyFortuneService")
-
     public void setFortuneService( FortuneService fortuneService) {
         this.fortuneService = fortuneService;
     }
