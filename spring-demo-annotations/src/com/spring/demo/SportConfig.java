@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import src.com.spring.demo.models.Coach;
 import src.com.spring.demo.models.SwimCoach;
+import src.com.spring.demo.models.ValorantCoach;
 import src.com.spring.demo.services.FortuneService;
 import src.com.spring.demo.services.HappyFortuneService;
+import src.com.spring.demo.services.ThatKindOfFortuneService;
 
 
 @Configuration
@@ -21,9 +23,22 @@ public class SportConfig {
     }
 
     @Bean
+    public Coach valorantCoach(){
+        ValorantCoach valorantCoach = new ValorantCoach();
+        return valorantCoach;
+    }
+
+    @Bean
     public FortuneService happyFortuneService(){
        return new HappyFortuneService();
     }
+
+    @Bean
+    public FortuneService thatKindOfFortuneService(){
+        return new ThatKindOfFortuneService();
+    }
+
+
 
 
 }
