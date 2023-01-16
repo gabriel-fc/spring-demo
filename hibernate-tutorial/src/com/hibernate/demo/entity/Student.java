@@ -1,15 +1,17 @@
 package src.com.hibernate.demo.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name="student")
-public class Student {
+public class Student{
+
+
     @Id
     @Column(name="id")
+    //if it doesn't explicit configured, that's the default behavior
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name="first_name")
     private String firstName;
@@ -65,5 +67,13 @@ public class Student {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        return (that.getClass() == Student.class && this.id == ((Student) that).getId() &&
+                Objects.equals(this.firstName, ((Student) that).getFirstName()) &&
+                this.lastName.equals(((Student) that).getLastName()) &&
+                this.email.equals(((Student) that).getEmail()));
     }
 }
