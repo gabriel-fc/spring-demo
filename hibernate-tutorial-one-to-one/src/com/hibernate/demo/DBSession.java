@@ -3,6 +3,7 @@ package src.com.hibernate.demo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import src.com.hibernate.demo.entity.InstructorDetail;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,7 +24,18 @@ public class DBSession<T> {
         try{
             return session.get(type, id);
         }catch (Exception e){
-            throw new RuntimeException("Student with id = " + id + " not found");
+            throw new RuntimeException("Student with id = " + id + " not found\n"+e.getMessage());
+        }finally {
+            session.close();
+        }
+    }
+
+    public InstructorDetail getInstructorDetail(int id){
+        beginTransaction();
+        try{
+            return session.get(InstructorDetail.class, id);
+        }catch (Exception e){
+            throw new RuntimeException("Student with id = " + id + " not found\n"+e.getMessage());
         }finally {
             session.close();
         }
@@ -63,12 +75,25 @@ public class DBSession<T> {
     }
 
     public void deleteObject(int id){
+        T obj = getObject(id);
         beginTransaction();
         try {
-            session.createQuery("delete from Student s where s.id="+id).executeUpdate();
+            session.delete(obj);
+            //session.createQuery("delete from instructor s where s.id="+id).executeUpdate();
             session.getTransaction().commit();
         }catch (Exception e){
-            throw new RuntimeException("unable to update");
+            throw new RuntimeException("unable to update "+e.getMessage());
+        }
+    }
+
+    public T getByInstructorDetail(int id){
+        beginTransaction();
+        try{
+            return (T)session.get(InstructorDetail.class, id).getInstructor();
+        }catch (Exception e){
+            throw new RuntimeException("Student with id = " + id + " not found\n"+e.getMessage());
+        }finally {
+            session.close();
         }
     }
 
@@ -80,9 +105,19 @@ public class DBSession<T> {
     public void clearTable(){
         beginTransaction();
         try{
-            session.createQuery("delete from Student").executeUpdate();
+            session.createQuery("delete from Instructor").executeUpdate();
             session.getTransaction().commit();
         }catch (Exception e){ throw new RuntimeException(e);}
 
+    }
+
+    public void deleteByInstructorDetail(int id) {
+        InstructorDetail instructorDetail = getInstructorDetail(id);
+        beginTransaction();
+        try {
+            session.delete(instructorDetail);
+            session.getTransaction().commit();
+
+        }catch (Exception e){ throw new RuntimeException(e);}
     }
 }

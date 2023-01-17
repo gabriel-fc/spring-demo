@@ -21,6 +21,8 @@ public class Instructor {
         instructorDetail = new InstructorDetail("joaozinho gameplays", "dar muita bala");
     }
 
+    public Instructor(){}
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="instructor_detail_id")
     private InstructorDetail instructorDetail;
@@ -74,5 +76,15 @@ public class Instructor {
                 ", email='" + email + '\'' +
                 ", instructorDetail= {\n" + instructorDetail.toString() +
                 "}\n}";
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        return that.getClass() == Instructor.class &&
+                id == ((Instructor)that).getId() &&
+                firstName.equals(((Instructor) that).getFirstName()) &&
+                lastName.equals(((Instructor) that).lastName) &&
+                email.equals(((Instructor) that).email) &&
+                instructorDetail.equals(((Instructor) that).getInstructorDetail());
     }
 }

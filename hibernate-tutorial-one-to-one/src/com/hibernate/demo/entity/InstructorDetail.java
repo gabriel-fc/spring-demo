@@ -1,7 +1,6 @@
 package src.com.hibernate.demo.entity;
 
 
-
 import javax.persistence.*;
 
 @Entity
@@ -16,11 +15,15 @@ public class InstructorDetail {
     private String youtubeChannel;
     @Column(name = "hobby")
     private String hobby;
+    @OneToOne(mappedBy = "instructorDetail", cascade = CascadeType.ALL)
+    private Instructor instructor;
 
     public InstructorDetail(String youtubeChannel, String hobby) {
         this.youtubeChannel = youtubeChannel;
         this.hobby = hobby;
     }
+
+    public InstructorDetail(){}
 
     public int getId() {
         return id;
@@ -46,6 +49,14 @@ public class InstructorDetail {
         this.hobby = hobby;
     }
 
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
     @Override
     public String toString() {
         return "InstructorDetail{" +
@@ -53,5 +64,13 @@ public class InstructorDetail {
                 ", youtubeChannel='" + youtubeChannel + '\'' +
                 ", hobby='" + hobby + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        return that.getClass() == InstructorDetail.class &&
+                id == ((InstructorDetail) that).getId() &&
+                youtubeChannel.equals(((InstructorDetail) that).getYoutubeChannel()) &&
+                hobby.equals(((InstructorDetail) that).getHobby());
     }
 }
