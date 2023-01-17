@@ -78,7 +78,7 @@ public class DBInstructorTest {
     }
 
     @Test
-    public void testeDeletByInstructorDetail(){
+    public void testDeleteByInstructorDetail(){
         try{
             int id = addInstructor(instructor);
             InstructorDetail instructorDetail = ((Instructor)session.getObject(id)).getInstructorDetail();

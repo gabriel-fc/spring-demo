@@ -10,7 +10,7 @@ import src.com.hibernate.demo.entity.InstructorDetail;
 public class HibernateDemoConfig {
 
 
-    @Bean
+    @Bean(destroyMethod = "close")
     public SessionFactory getSessionFactory(){
         return new org.hibernate.cfg.Configuration()
                 .configure("src/hibernate.cfg.xml")
@@ -19,8 +19,9 @@ public class HibernateDemoConfig {
                 .buildSessionFactory();
     }
 
-    @Bean
+    @Bean(destroyMethod = "close")
     public DBSession getSession(){
         return new DBSession<>(Instructor.class);
     }
+
 }

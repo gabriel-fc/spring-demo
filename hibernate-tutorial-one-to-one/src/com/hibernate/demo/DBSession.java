@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import src.com.hibernate.demo.entity.InstructorDetail;
 
+import javax.annotation.PreDestroy;
 import java.io.Serializable;
 import java.util.List;
 
@@ -119,5 +120,10 @@ public class DBSession<T> {
             session.getTransaction().commit();
 
         }catch (Exception e){ throw new RuntimeException(e);}
+    }
+    @PreDestroy
+    public void close(){
+        System.out.println("close session");
+        if(session != null) session.close();
     }
 }
