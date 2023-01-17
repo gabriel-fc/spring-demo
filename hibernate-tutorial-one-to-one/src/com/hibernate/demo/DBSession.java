@@ -114,6 +114,8 @@ public class DBSession<T> {
 
     public void deleteByInstructorDetail(int id) {
         InstructorDetail instructorDetail = getInstructorDetail(id);
+        instructorDetail.getInstructor().setInstructorDetail(null);
+        updateObject((T)instructorDetail.getInstructor());
         beginTransaction();
         try {
             session.delete(instructorDetail);

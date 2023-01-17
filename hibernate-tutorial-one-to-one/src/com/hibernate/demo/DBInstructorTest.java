@@ -83,7 +83,7 @@ public class DBInstructorTest {
             int id = addInstructor(instructor);
             InstructorDetail instructorDetail = ((Instructor)session.getObject(id)).getInstructorDetail();
             session.deleteByInstructorDetail(instructorDetail.getId());
-            assertNull(session.getObject(id));
+            assertNotNull(session.getObject(id));
         }catch (Exception e){
             fail();
         }
