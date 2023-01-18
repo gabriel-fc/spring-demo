@@ -1,6 +1,8 @@
 package src.com.hibernate.demo.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "instructor")
@@ -14,6 +16,16 @@ public class Instructor {
     private String firstName;
     @Column(name = "last_name") private String lastName;
     @Column(name = "email") private String email;
+
+    @OneToMany(mappedBy = "instructor", cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH
+    })
+    private List<Course> courses;
+
+
     public Instructor(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -86,5 +98,19 @@ public class Instructor {
                 lastName.equals(((Instructor) that).lastName) &&
                 email.equals(((Instructor) that).email) &&
                 instructorDetail.equals(((Instructor) that).getInstructorDetail());
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public void add(Course newCourse){
+        if(courses == null) courses = new ArrayList<>();
+        courses.add(newCourse);
+        newCourse.setInstructor(this);
     }
 }

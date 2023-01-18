@@ -3,6 +3,7 @@ package src.com.hibernate.demo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import src.com.hibernate.demo.entity.Instructor;
 import src.com.hibernate.demo.entity.InstructorDetail;
 
 import javax.annotation.PreDestroy;
@@ -20,7 +21,7 @@ public class DBSession<T> {
         this.type = type;
     }
 
-    public T getObject(int id){
+    public Object getObject(int id, Class type){
         beginTransaction();
         try{
             return session.get(type, id);
@@ -48,7 +49,7 @@ public class DBSession<T> {
             session.save(object);
             session.getTransaction().commit();
         }catch (Exception e){
-            throw new RuntimeException("Unable to persist object " + object.toString());
+            throw new RuntimeException("Unable to persist object \n" + e.getMessage());
         }finally {
             session.close();
         }
@@ -75,8 +76,8 @@ public class DBSession<T> {
         }
     }
 
-    public void deleteObject(int id){
-        T obj = getObject(id);
+    public void deleteObject(int id, Class type){
+        Object obj = getObject(id, type);
         beginTransaction();
         try {
             session.delete(obj);
@@ -87,10 +88,10 @@ public class DBSession<T> {
         }
     }
 
-    public T getByInstructorDetail(int id){
+    public Instructor getByInstructorDetail(int id){
         beginTransaction();
         try{
-            return (T)session.get(InstructorDetail.class, id).getInstructor();
+            return session.get(InstructorDetail.class, id).getInstructor();
         }catch (Exception e){
             throw new RuntimeException("Student with id = " + id + " not found\n"+e.getMessage());
         }finally {
