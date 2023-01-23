@@ -12,8 +12,11 @@ public class LoggingAspect {
     @Pointcut("execution(* src.com.spring.aopdemo.models.Account.*(..))")
     public void forAllAccountMethods(){}
 
-    @Pointcut("!execution(* src.com.spring.aopdemo.models.Account.set*(..))")
-    public void exceptAccountSetterMethods(){}
+    @Pointcut("execution(* src.com.spring.aopdemo.models.Account.set*(..))")
+    public void forAllAccountSetterMethods(){}
+
+    @Pointcut("forAllAccountMethods() && !forAllAccountSetterMethods()")
+    public void forAllAccountMethodsExceptSetters(){}
 
     @Before("execution(public * src.com.spring.aopdemo.dao.*.addAccount())")
 
@@ -21,7 +24,7 @@ public class LoggingAspect {
         System.out.println("\n=============>>>> Executing @Before advice on addAccount");
     }
 
-    @Before("forAllAccountMethods() && exceptAccountSetterMethods()")
+    @Before("forAllAccountMethodsExceptSetters()")
     public void setUpAccountMethod(){
         System.out.println("\n=============>>>> Executing @Before advice on Account methods");
     }
