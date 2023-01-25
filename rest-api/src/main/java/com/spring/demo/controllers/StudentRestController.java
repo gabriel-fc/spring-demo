@@ -1,10 +1,16 @@
 package com.spring.demo.controllers;
 
+import com.spring.demo.exceptions.ExceptionResponse;
+import com.spring.demo.exceptions.StudentNotFoundException;
 import com.spring.demo.models.Student;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,14 +34,16 @@ public class StudentRestController {
 
 	@GetMapping("/students/{id}")
 	public Student getStudent(@PathVariable int id){
-		System.out.println(id);
-		return students.get(id);
+		try {
+			return students.get(id);
+		}catch (Exception e){
+			throw new StudentNotFoundException("student not found");
+		}
 	}
 
 	@PostMapping("/addStudent")
 	public void addStudent(){
 
 	}
-
 	
 }
